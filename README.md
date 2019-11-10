@@ -1,4 +1,4 @@
-# excelery-root
+# exceleryroot
 1. tools for excel; 2. marshland plant
 
 When you save a file as .xlam, the default location at the time of writing this is:
