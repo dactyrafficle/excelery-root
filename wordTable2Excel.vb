@@ -38,11 +38,12 @@ Private Function getTableDataAs2dArray(tbl As Table) As Variant
     'Dim table1 As Table
     'Set table1 = ActiveDocument.Tables(1)
 
-    Dim n_items As Integer
+    Dim n_items, n_cols As Integer
     n_items = tbl.Rows.Count
+    n_cols = tbl.Columns.Count
 
     Dim arr() As Variant
-    ReDim arr(1 To n_items, 1 To 9)
+    ReDim arr(1 To n_items, 1 To n_cols)
 
     Dim x, y As Integer
     For y = 1 To tbl.Rows.Count
