@@ -1,3 +1,9 @@
+'taking the intersection between the input range and the used range shrinks the range a lot
+'it can make your code run 1000s of times faster
+
+'also convert the range to an array
+'itll also make it 1000x faster
+
 Option Explicit
 
 Function rsum(r1 As Range) As Double
