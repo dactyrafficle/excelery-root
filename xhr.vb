@@ -12,6 +12,11 @@ Sub abc()
     xhr.Open "GET", url, False
     xhr.send
     
+    'tools > references > microsoft html doc
+    'lots to figure out here
+    Dim html As New HTMLDocument
+    html.body.innerhtml = xhr.responseText 'does nothing here atm
+    
     'in this case, the html document comes back as a big string - so i have to parse it
     Debug.Print xhr.responseText
 
