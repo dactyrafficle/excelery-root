@@ -1,6 +1,8 @@
 # exceleryroot
 1. tools for excel; 2. marshland plant
 
+** .xlam **
+
 When you save a file as .xlam, the default location at the time of writing this is:
 
 c:\users\[username]\appdata\roaming\microsoft\addins\
@@ -10,3 +12,8 @@ In excel.exe, go to file>options>addins and at the bottom it says 'manage' next 
 Alternatively, you can go to the developper tab in the ribbon, and hit 'add-ins' which will produce the same dialogue box.
 
 Once the add-in is activated, if you go to the vba editor, you should be able to see the .xlam file and its modules (unless it is protected) in the LHS column.
+
+** tools > references **
+Some libraries like FSO (file system object) or xmlhttp (to make get/post requests), or html parser - you can turn them on
+also, to use the xlam functions in your current wbs vba code, you can include that from references too
+
