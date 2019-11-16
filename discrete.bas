@@ -1,65 +1,33 @@
 Option Explicit
 
-'this function accepts 2 ranges: r1 for the elements, r2 for the frequencies
+Function discrete(r1 As Range, r2 As Range)
 
-Function rdiscrete(r1 As Range, r2 As Range)
+  'shrink column ranges to contiguous cells
+  Set r1 = Range(r1(1), r1(1).End(xlDown))
+  Set r2 = Range(r2(1), r2(1).End(xlDown))
 
-  'testing
-  'Sub abc()
-  'Dim r1, r2 As Range
-  'Set r1 = Range("a2:a4")
-  'Set r2 = Range("b2:b4")
+  'convert ranges to arrays
+  Dim arr1, arr2 As Variant
+  arr1 = r1.Value
+  arr2 = r2.Value
 
-Dim n1, n2, n As Integer
-n1 = r1.Count
-n2 = r2.Count
+  Dim n As Long
+  n = Application.Sum(arr2) 'sum total of 2nd array
 
-If n1 > n2 Then
-  n = n2
-Else
-  n = n1
-End If
+  Dim x As Double
+  x = n * Rnd() 'generate a random number 0 <= x < n
 
-'there are n bins
+  Dim min, max As Double
+  min = 0
+  max = 0
 
-Dim p As Integer
-p = 0
-
-Dim r As Range
-For Each r In r2
-    p = p + r.Value
-Next r
-
-'MsgBox p
-'abc = p
-
-Dim x() As Variant
-ReDim x(1 To p)
-
-Dim i, counter As Integer
-counter = 0
-For i = 1 To n
-    Dim name As Variant
-    name = r1(i)
-    Dim freq As Integer
-    freq = r2(i)
-    Dim j As Integer
-    For j = counter + 1 To counter + freq
-        'this how many times we add name to the array
-        x(j) = name
-        Debug.Print (name)        
-    Next j
-    counter = counter + freq
-Next i
-
-'MsgBox "hi"
-
-Dim y As Integer
-y = Int(Rnd() * UBound(x) + 1)
-
-Debug.Print (y)
-
-rdiscrete = x(y)
-
+  Dim i As Long
+  For i = LBound(arr1, 1) To UBound(arr1, 1) 'where on the line x falls
+      max = max + arr2(i, 1)
+      If x >= min And x < max Then
+          discrete = arr1(i, 1)
+      End If
+      min = min + arr2(i, 1)
+  Next i
 
 End Function
