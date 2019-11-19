@@ -1,21 +1,28 @@
-Function xorShift(str As String) As String
+Function xorShift(str1 As String, str2) As String
 
-    'ideally we would use a stream of binarys to shift this but here we'll just setting for random
+    'xorshift the 1st string by the values of the 2nd
 
-    Dim bytes() As Byte
-    bytes = StrConv(str, vbFromUnicode) 'an array of bytes
+    'convert str1 and str2 into byte arrays
+    Dim msg() As Byte, pass() As Byte
+    msg = StrConv(str1, vbFromUnicode)
+    pass = StrConv(str2, vbFromUnicode)
     
     Dim output As String
     output = ""
     
     Dim i As Integer
-    For i = 0 To UBound(bytes)
+    For i = LBound(msg) To UBound(msg)
+
+        Dim x1, x2, b, y As Integer
+        x1 = msg(i)
+
+        b = UBound(pass) + 1
+        x2 = pass(i Mod b)
     
-        Dim x1, x2, y As Integer
-        x1 = bytes(i)
-        x2 = Int(Rnd() * 128)
+    'so this does work, but i think 97 xor 97 is a bad result i think - how to fix
+        Debug.Print x1 & " xor " & x2
         
-        ' ie. 10 Xor 8 -> 1010 Xor 1000 -> 0010 = 2
+        ' ie. 10 Xor 8 ->1010 Xor 1000 -> 0010 = 2
         y = x1 Xor x2
         
         output = output & Chr(y)
