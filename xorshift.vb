@@ -26,9 +26,12 @@ Function xorShift(str1 As String, str2) As String
     
     Next i
     
+'this array is the right length
     Debug.Print UBound(out) - LBound(out) + 1
     
     ' xorshift("abcde", "ab") produces a value with length 0. i want a blank with length 5
+'is because a xor a gives null, which kills the rest of it, abcde, "c" gives a string length 2, it gets killed at xor("c","c")
+'how to solve this?
     xorShift = StrConv(out, vbUnicode)
 
 End Function
