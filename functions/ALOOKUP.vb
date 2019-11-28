@@ -1,14 +1,20 @@
-'the point of this function is that its like a vlookup but you can have it return a collection of results if there are multiple matches
-
 Option Explicit
 
-Function ALOOKUP(master As Variant, r As Range, x As Long, returnAsCollection As Boolean) As Variant
+'accepts ranges and arrays
+'isExact is only there to keep the same arg sequence as vlookup
+Function ALOOKUP(master As Variant, a As Variant, x As Long, isExact As Boolean, returnAsCollection As Boolean) As Variant
 
-    'how can i make returnAsCollection optional?
-
-    'save the range as a 2d array
+    'if a is a range, shrink before converting to an array
     Dim arr As Variant
-    arr = r.Value
+    If TypeName(a) = "Range" Then
+        Dim r As Range
+        Set r = Intersect(a.Parent.UsedRange, a)
+        arr = r.Value
+        Debug.Print UBound(arr, 1)
+    Else
+        arr = a
+    End If
+
     
     'loop over the first column, and look for master
     Dim i As Long
@@ -18,12 +24,6 @@ Function ALOOKUP(master As Variant, r As Range, x As Long, returnAsCollection As
            temp.Add arr(i, x)
         End If
     Next i
-    
-    'for testing
-    Dim j As Long
-    For j = 1 To temp.Count
-        Debug.Print temp(j)
-    Next j
     
     If returnAsCollection Then
         ALOOKUP = temp
