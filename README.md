@@ -17,3 +17,14 @@ Once the add-in is activated, if you go to the vba editor, you should be able to
 Some libraries like FSO (file system object) or xmlhttp (to make get/post requests), or html parser - you can turn them on
 also, to use the xlam functions in your current wbs vba code, you can include that from references too
 
+** WORD FILES
+
+activedocument is the main object, and that can be split up into sections
+
+activedocument.sections.count
+
+a section can have a header, range, footer; i think range is like body
+
+because activedocument.sections(1).range is a thing that can have tables, but so is
+
+activedocument.sections(1).headers(1).range.tables(1) etc etc.
