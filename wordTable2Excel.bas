@@ -1,13 +1,11 @@
-Attribute VB_Name = "NewMacros"
 
 Sub copyData2Excel()
-
 
     'create an instance of excel.exe
     Dim excel
     Set excel = CreateObject("excel.application")
     excel.Visible = True
-
+        
     excel.workbooks.Add
 
     'how many sections?
@@ -30,13 +28,16 @@ For i = 1 To m
     Dim a As Long
     a = InStr(invoice_, "INVOICE:") + Len("INVOICE:") + 1
 
-    invoice = "'" & Mid(invoice_, a, InStr(invoice_, "Shipment") - a)
+    invoice = Mid(invoice_, a, InStr(invoice_, "Shipment") - a)
     
     ' i need to PARSE THIS
     Dim order_ As Variant, order As Variant
     order_ = ActiveDocument.Sections(i).Headers(1).Range.Tables(2).Cell(7, 1)
-    order = "'" & Mid(order_, 1, Len(order_) - 1)
+    order = Mid(order_, 1, Len(order_) - 1)
     
+    Dim customer_ As Variant, customer As Variant
+    customer_ = ActiveDocument.Sections(i).Headers(1).Range.Tables(2).Cell(7, 4)
+    customer = Mid(customer_, 1, Len(customer_) - 1)
     'MsgBox order
 
     'ActiveDocument.Sections(i).Range.Select
@@ -57,10 +58,11 @@ For i = 1 To m
             
             Dim x, y As Long
             For y = 1 To UBound(data2, 1)
-                excel.Range("a1").Offset(n_rows, 0).value = order
-                excel.Range("a1").Offset(n_rows, 1).value = invoice
+                excel.Range("a1").Offset(n_rows, 0).value = "'" & customer
+                excel.Range("a1").Offset(n_rows, 1).value = "'" & order
+                excel.Range("a1").Offset(n_rows, 2).value = "'" & invoice
                 For x = 1 To UBound(data2, 2)
-                    excel.Range("a1").Offset(n_rows, x + 1).value = data2(y, x)
+                    excel.Range("a1").Offset(n_rows, x + 2).value = data2(y, x)
                 Next x
                 n_rows = n_rows + 1
             Next y
