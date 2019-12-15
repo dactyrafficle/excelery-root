@@ -1,4 +1,3 @@
-
 'use this to fill in the worksheet
 'the use tacocat code to make the json file
 'and the rest is tacocat
@@ -8,10 +7,10 @@ Sub abc()
 
     Dim HostFolder As String
     HostFolder = Application.ActiveWorkbook.Path & "\Active"
-    'Debug.Print HostFolder
-
+    
     Dim FileSystem As Object
     Set FileSystem = CreateObject("Scripting.FileSystemObject")
+    
     'Call DoFolder(FileSystem.GetFolder(HostFolder))
     DoFolder FileSystem.GetFolder(HostFolder)
     
@@ -27,16 +26,20 @@ Sub DoFolder(Folder)
     For Each SubFolder In Folder.SubFolders
         DoFolder SubFolder
         
-        Debug.Print SubFolder.Name
-        
+        col.Add New Collection
+        col(col.Count).Add SubFolder.Name
+
         Dim File
         For Each File In SubFolder.Files
-        
-            Debug.Print File.Name
-        
+            col(col.Count).Add File.Name
         Next
-        
     Next
-
     
+    Dim i As Long, j As Long
+    For i = 1 To col.Count
+        For j = 1 To col(i).Count
+            Debug.Print col(i)(j)
+        Next j
+    Next i
+
 End Sub
