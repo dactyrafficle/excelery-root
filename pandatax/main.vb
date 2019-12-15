@@ -8,7 +8,7 @@ Sub abc()
 
     Dim HostFolder As String
     HostFolder = Application.ActiveWorkbook.Path & "\Active"
-    Debug.Print HostFolder
+    'Debug.Print HostFolder
 
     Dim FileSystem As Object
     Set FileSystem = CreateObject("Scripting.FileSystemObject")
@@ -20,18 +20,23 @@ End Sub
 'im confused by the syntax
 Sub DoFolder(Folder)
 
+    Dim col As New Collection
+
     'loop over all the subfolders
     Dim SubFolder As Object
     For Each SubFolder In Folder.SubFolders
         DoFolder SubFolder
-        Debug.Print SubFolder
+        
+        Debug.Print SubFolder.Name
+        
+        Dim File
+        For Each File In SubFolder.Files
+        
+            Debug.Print File.Name
+        
+        Next
+        
     Next
-    
-    'or loop over all the files
-    Dim File
-    For Each File In Folder.Files
-        ' Operate on each file
-        'Debug.Print File
-    Next
+
     
 End Sub
