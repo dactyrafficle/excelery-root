@@ -23,5 +23,16 @@ changeImagesBtn.addEventListener('click', function(e) {
 });
 
 
-	
+// change colors
+let changeColorsBtn = document.getElementById('changeColorsBtn');
+changeColorsBtn.addEventListener('click', function(e) {
+
+	chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+		chrome.tabs.executeScript(
+			tabs[0].id, // you must indicate the tab being accessed to get to dom
+			{file: "changeColors.js"} // include the code file in the manifest
+		); 
+	});
+
+});
 	
