@@ -89,8 +89,8 @@ Private Function getTableDataAs2dArray(tbl As Table) As Variant
             
             Dim value As Variant
             value = r.Text
-            
-						'store the value of the cell in the array
+
+            'store the value of the cell in the array
             arr(y, x) = value
         
         Next x
