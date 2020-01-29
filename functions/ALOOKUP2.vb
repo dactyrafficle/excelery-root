@@ -2,7 +2,7 @@ Option Explicit
 
 'accepts ranges and arrays
 'isExact is only there to keep the same arg sequence as vlookup
-Function ALOOKUP(master As Variant, a As Variant, x As Long, isExact As Boolean, returnAsCollection As Boolean) As Variant
+Function ALOOKUP2(master As Variant, a As Variant, x As Long, isExact As Boolean, returnAsCollection As Boolean) As Variant
     
     'master references a range, when does it become a value?
     If IsEmpty(master) Then
