@@ -1,3 +1,5 @@
+'https://docs.microsoft.com/en-us/windows/win32/cimwin32prov/win32-processor
+
 Sub getCPUInformation()
   
   Dim objWMIService As Object
