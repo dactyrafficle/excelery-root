@@ -1,7 +1,7 @@
 Option Explicit
 
 'THIS IS PROBABLY THE BEST TO INCORPORATE INTO A LARGE PIECE OF CODE
-Function checkIfWsExists(wsName As String)
+Function checkIfWsExists(wsName As String) As Boolean
 
   checkIfWsExists = False
     
