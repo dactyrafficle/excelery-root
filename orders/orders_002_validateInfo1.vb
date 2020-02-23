@@ -28,7 +28,6 @@ Sub validate_info1()
     r.Offset(i, 3).Formula = "=sumifs(indirect(" & r.Offset(i, 2).Address(False, False) & "),indirect(" & r.Offset(i, 1).Address(False, False) & ")," & Chr(34) & "TOTAL CASES:" & Chr(34) & ")"
     r.Offset(i, 4).Formula = "=sumifs(indirect(" & r.Offset(i, 2).Address(False, False) & "),indirect(" & r.Offset(i, 1).Address(False, False) & ")," & Chr(34) & "TOTAL VALUE:" & Chr(34) & ")"
 
-
   Next i
 
 End Sub

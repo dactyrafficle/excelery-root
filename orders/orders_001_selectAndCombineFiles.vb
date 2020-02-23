@@ -1,6 +1,6 @@
 Option Explicit
 
-Sub openDialogBoxAndSelectFiles()
+Sub selectAndCombineFiles()
 
   Dim wb1 As Workbook
   Set wb1 = ActiveWorkbook
