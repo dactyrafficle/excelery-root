@@ -1,4 +1,5 @@
-Attribute VB_Name = "master_aggregate"
+option explicit
+
 Sub aggro()
 
     Dim wb1 As Workbook
