@@ -1,17 +1,25 @@
 # exceleryroot
 1. tools for excel; 2. marshland plant
 
-** .xlam **
+**.xlam**
 
 When you save a file as .xlam, the default location at the time of writing this is:
 
 c:\users\[username]\appdata\roaming\microsoft\addins\
+
+**Step 1**
 
 In excel.exe, go to file>options>addins and at the bottom it says 'manage' next to a drop down which should say 'excel add-ins' and a button which reads 'go...'. Press that button! A dialogue box opens, and you can select the .xlam file.
 
 Alternatively, you can go to the developper tab in the ribbon, and hit 'add-ins' which will produce the same dialogue box.
 
 Once the add-in is activated, if you go to the vba editor, you should be able to see the .xlam file and its modules (unless it is protected) in the LHS column.
+
+**Step 2**
+
+If you don't see the customUI ribbon, it might be because the addins\ is not set as a trusted location.
+
+You can fix this by going to file>options>trust center>trust center settings: add new location
 
 ** tools > references **
 Some libraries like FSO (file system object) or xmlhttp (to make get/post requests), or html parser - you can turn them on
