@@ -1,9 +1,9 @@
 Option Explicit
 
-'accepts ranges and arrays
-'isExact is only there to keep the same arg sequence as vlookup
-'return as array is preferable over collection bc sum/count work on an array
-Function ALOOKUP2(master As Variant, arr_ As Variant, x As Long, isExact As Boolean, returnAsArray As Boolean) As Variant
+'arr_ can be a range or arrays
+'isApprox is only there to keep the same arg sequence as vlookup
+'returnAsArray is preferable over collection bc SUM(), COUNT() and INDEX() work on arrays
+Public Function ALOOKUP2(lookup_value As Variant, arr_ As Variant, x As Long, Optional isApprox As Boolean = False, Optional returnAsArray As Boolean = False) As Variant
         
   'IF arr_ IS RANGE, SHRINK AND CONVERT TO ARR
   Dim arr As Variant
@@ -15,21 +15,22 @@ Function ALOOKUP2(master As Variant, arr_ As Variant, x As Long, isExact As Bool
     arr = arr_
   End If
 
-  'loop over the first column, and look for master
-  Dim i As Long, count As Long, temp() As Variant 'to store results
-  count = 0
-  For i = LBound(arr, 1) To UBound(arr, 1)
-    If arr(i, 1) = master Then
-      count = count + 1
-      ReDim Preserve temp(count)
-      temp(count) = arr(i, x)
+  'LOOP OVER THE FIRST COLUMN, AND LOOK FOR lookup_value
+  Dim i As Long, n As Long 'TO STORE THE NUMBER OF HITS
+  Dim temp() As Variant 'AN ARRAY TO STORE RESULTS
+  n = 0
+  For i = LBound(arr, 1) To UBound(arr, 1) 
+    If arr(i, 1) = lookup_value Then
+      ReDim Preserve temp(n) 'RESIZE THE ARRAY TO n
+      temp(n) = arr(i, x)
+      n = n + 1 'INCREMENT n
     End If
   Next i
     
   If returnAsArray Then
     ALOOKUP2 = temp
   Else
-    ALOOKUP2 = temp(1)
+    ALOOKUP2 = temp(0) 'RETURN THE FIRST HIT
   End If
   
 End Function
