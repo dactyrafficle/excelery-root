@@ -1,12 +1,20 @@
 Public Function RGB2HSL(r_ As Double, g_ As Double, b_ As Double) As Variant
 
+ 'NORMALIZE
  Dim R As Double, G As Double, B As Double
  R = r_ / 255
  G = g_ / 255
  B = b_ / 255
 
+ Dim arr(1 to 3) as variant
+ 
+ 'IF IS GREY; C=0
  If (R = G = B) Then
-  'MEANS THE COLOR IS GREY
+  arr(1) = 0 'h
+  arr(2) = 0 's
+  arr(3) = R 'l
+  RGB2HSL = arr
+  Exit Function
  End If
 
  Dim max As Double, min As Double
@@ -17,17 +25,6 @@ Public Function RGB2HSL(r_ As Double, g_ As Double, b_ As Double) As Variant
  c = max - min
 
  Dim h As Double, h_ As Double
-
- 'THIS MEANS THE COLOR IS GREY
- If (c = 0) Then
-  h = 0
-  Dim arr2(1 To 3) As Double
-  arr2(1) = h
-  arr2(2) = 0   'S = 0
-  arr2(3) = max 'L = MAX = R = G = B
-  rgb2hsl = arr2
-  Exit Function
- End If
 
  'VBA MOD FN DOESNT HANDLE NEGATIVE VALUES WELL
  If (max = R) Then
@@ -44,7 +41,7 @@ Public Function RGB2HSL(r_ As Double, g_ As Double, b_ As Double) As Variant
   h_ = ((R - G) / c) + 4
  End If
   
-  'CONSIDER THESE LINES INSTEAD OF 32:45
+ 'CONSIDER THESE LINES INSTEAD OF 32:45
  If (max = R) Then h_ = ((G - B) / c) - Int(((G - B) / c) / 6) * 6 'VBA MOD FN STINKS
  If (max = G) Then h_ = ((B - R) / c) + 2
  If (max = B) Then h_ = ((R - G) / c) + 4
@@ -55,19 +52,12 @@ Public Function RGB2HSL(r_ As Double, g_ As Double, b_ As Double) As Variant
  l = (max + min) / 2
 
  Dim s As Double
- If (l <= 0.5) Then
-  s = (max - min) / (max + min)
- Else
-  s = (max - min) / (2 - max - min)
- End If
+ If (l <= 0.5) Then s = (max - min) / (max + min)
+ If (l > 0.5) Then s = (max - min) / (2 - max - min)
 
- Dim arr(1 To 6) As Variant
  arr(1) = h
  arr(2) = s
  arr(3) = l
- 'arr(4) = max
- 'arr(5) = min
- 'arr(6) = c
 
  RGB2HSL = arr
 
