@@ -43,7 +43,12 @@ Public Function RGB2HSL(r_ As Double, g_ As Double, b_ As Double) As Variant
  If (max = B) Then
   h_ = ((R - G) / c) + 4
  End If
-
+  
+  'CONSIDER THESE LINES INSTEAD OF 32:45
+ If (max = R) Then h_ = ((G - B) / c) - Int(((G - B) / c) / 6) * 6 'VBA MOD FN STINKS
+ If (max = G) Then h_ = ((B - R) / c) + 2
+ If (max = B) Then h_ = ((R - G) / c) + 4
+    
  h = h_ * 60
 
  Dim l As Double
