@@ -3,7 +3,7 @@ Option Explicit
 'arr_ can be a range or arrays
 'isApprox is only there to keep the same arg sequence as vlookup
 'returnAsArray is preferable over collection bc SUM(), COUNT() and INDEX() work on arrays
-Public Function ALOOKUP2(lookup_value As Variant, arr_ As Variant, x As Long, Optional isApprox As Boolean = False, Optional returnAsArray As Boolean = False) As Variant
+Public Function ALOOKUP2(lookup_value As Variant, arr_ As Variant, x As Long, Optional isApprox As Boolean = False, Optional returnFirstMatch As Boolean = False) As Variant
         
   'IF arr_ IS RANGE, SHRINK AND CONVERT TO ARR
   Dim arr As Variant
@@ -27,10 +27,10 @@ Public Function ALOOKUP2(lookup_value As Variant, arr_ As Variant, x As Long, Op
     End If
   Next i
     
-  If returnAsArray Then
-    ALOOKUP2 = temp
-  Else
+  If returnFirstMatch Then
     ALOOKUP2 = temp(0) 'RETURN THE FIRST HIT
+  Else
+    ALOOKUP2 = temp 
   End If
   
 End Function
