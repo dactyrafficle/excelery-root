@@ -1,6 +1,6 @@
 Option Explicit
 
-Public Function str_split(str As String, ParamArray delimiters() As Variant)
+Public Function STR_SPLIT(str As String, ParamArray delimiters() As Variant) As Variant
 
  'FIRST CHAR OF STR
  '0 : ignore
@@ -21,11 +21,9 @@ Public Function str_split(str As String, ParamArray delimiters() As Variant)
  Dim y As Long, x As Long
  For y = LBound(bytes) To UBound(bytes)
  
-  For x = LBound(delimiters) To UBound(delimiters)
-   If (Chr(bytes(y)) = delimiters(x)) Then
-    bytes(y) = 0
-   End If
-  Next x
+ For x = LBound(delimiters) To UBound(delimiters)
+  If (Chr(bytes(y)) = delimiters(x)) Then bytes(y) = 0
+ Next x
   
   If (y = LBound(bytes)) Then 'IS FIRST CHAR
   
@@ -48,9 +46,8 @@ Public Function str_split(str As String, ParamArray delimiters() As Variant)
     If (bytes(y) <> 0 And bytes(y - 1) <> 0) Then arr(n) = arr(n) & Chr(bytes(y))
   
   End If
-
  Next y
 
- str_split = arr
+ STR_SPLIT = arr
 
 End Function
