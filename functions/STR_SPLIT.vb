@@ -21,6 +21,7 @@ Public Function STR_SPLIT(str As String, ParamArray delimiters() As Variant) As 
  Dim y As Long, x As Long
  For y = LBound(bytes) To UBound(bytes)
  
+  'For x = LBound(delimiters) To UBound(delimiters): Select Case Chr(bytes(y)) = delimiters(x): Case True: bytes(y) = 0: End Select: Next x
   For x = LBound(delimiters) To UBound(delimiters)
    If (Chr(bytes(y)) = delimiters(x)) Then bytes(y) = 0
   Next x
