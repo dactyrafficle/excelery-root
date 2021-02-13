@@ -1,16 +1,20 @@
 Option Explicit
 
- 
-
 Public Function STR_SPLIT(str As String) As Variant
 
+ 'FIRST CHAR OF STR
+ '0 : ignore
+ '1 : +el to arr, +char to last el
  
-
-Dim bytes() As Byte
-
-bytes = StrConv(str, vbFromUnicode) 'ARRAY OF BYTES
-
+ 'ELSE
+ '0 0 : ignore
+ '0 1 : +el to arr, +char to last el
+ '1 1 : +char to last el
+ '1 0 : ignore
  
+ Dim bytes() As Byte
+ bytes = StrConv(str, vbFromUnicode) 'ARRAY OF BYTES
+
 
 'char(32) is blank space
 
