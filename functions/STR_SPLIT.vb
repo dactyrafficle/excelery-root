@@ -1,6 +1,6 @@
 Option Explicit
 
-Public Function STR_SPLIT(str As String) As Variant
+Public Function str_split(str As String, ParamArray delimiters() As Variant)
 
  'FIRST CHAR OF STR
  '0 : ignore
@@ -8,110 +8,49 @@ Public Function STR_SPLIT(str As String) As Variant
  
  'ELSE
  '0 0 : ignore
+ '1 0 : ignore
  '0 1 : +el to arr, +char to last el
  '1 1 : +char to last el
- '1 0 : ignore
- 
+
  Dim bytes() As Byte
  bytes = StrConv(str, vbFromUnicode) 'ARRAY OF BYTES
-
-
-'char(32) is blank space
-
-'char(10) is newline char
-
- Dim arr() As Variant
-
-Dim n As Long
-
-n = 0
-
- Dim i As Long
-
-For i = LBound(bytes) To UBound(bytes)
-
-  'IS FIRST CHARACTER?
-
-  If (i = LBound(bytes)) Then
-
  
-
-    If (bytes(i) <> 32 And bytes(i) <> 10) Then
-
-     'add element to array
-
-     n = n + 1
-
-     ReDim Preserve arr(1 To n)
-
-    arr(n) = arr(n) & Chr(bytes(i))
-
-    End If
-
-  
-
-  Else
-
-  'NOT FIRST ELEMENT
-
-  
-
-   
-
-   'THE PREVIOUS ELEMENT IS NOT SOLID
-
-   If (bytes(i - 1) = 32 Or bytes(i - 1) = 10) Then
-
-   
-
-    'CURRENT IS SOLID
-
-     If (bytes(i) <> 32 And bytes(i) <> 10) Then
-
-      'ADD ELEMENT TO ARRAY
-
-      n = n + 1
-
-      ReDim Preserve arr(1 To n)
-
-      arr(n) = arr(n) & Chr(bytes(i))
-
-     Else
-
-      'CURRENT IS NOT SOLID
-
-      'SKIP
-
-     End If
-
-
-   Else
-
-   'PREVIOUS ELEMENT IS SOLID
-
-    'CURRENT IS SOLID
-
-     If (bytes(i) <> 32 And bytes(i) <> 10) Then
-
-      'ADD CHARACTER TO LAST ELEMENT OF ARRAY
-
-      arr(n) = arr(n) & Chr(bytes(i))
-
-     Else
-
-     'CURRENT IS NOT SOLID
-
-      'SKIP
-
-     End If
-
-
+ Dim arr() As Variant, n As Long
+ n = 0
+ 
+ Dim y As Long, x As Long
+ For y = LBound(bytes) To UBound(bytes)
+ 
+  For x = LBound(delimiters) To UBound(delimiters)
+   If (Chr(bytes(y)) = delimiters(x)) Then
+    bytes(y) = 0
    End If
-
+  Next x
+  
+  If (y = LBound(bytes)) Then 'IS FIRST CHAR
+  
+    If (bytes(y) <> 0) Then
+      n = n + 1
+      ReDim Preserve arr(1 To n)
+      arr(n) = arr(n) & Chr(bytes(y))
+    End If
+  
+  Else 'NOT FIRST CHAR
+  
+    '0 1
+    If (bytes(y) <> 0 And bytes(y - 1) = 0) Then
+      n = n + 1
+      ReDim Preserve arr(1 To n)
+      arr(n) = arr(n) & Chr(bytes(y))
+    End If
+  
+    '1 1
+    If (bytes(y) <> 0 And bytes(y - 1) <> 0) Then arr(n) = arr(n) & Chr(bytes(y))
+  
   End If
 
- Next i
+ Next y
 
-STR_SPLIT = arr
+ str_split = arr
 
 End Function
