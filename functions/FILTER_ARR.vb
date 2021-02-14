@@ -1,4 +1,4 @@
-Public Function filter_arr(input_arr As Variant, col_index As Long, filter_value As Variant) As Variant
+Public Function FILTER_ARR(input_arr As Variant, col_index As Long, filter_value As Variant) As Variant
 
  'INPUT ARRAY ROWS
  Dim n1 As Long, n2 As Long
@@ -26,6 +26,6 @@ Public Function filter_arr(input_arr As Variant, col_index As Long, filter_value
   End If
  Next y
 
- filter_arr = Application.Transpose(temp_arr)
+ FILTER_ARR = Application.Transpose(temp_arr)
 
 End Function
