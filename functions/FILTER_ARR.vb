@@ -1,5 +1,8 @@
 Public Function FILTER_ARR(input_arr As Variant, col_index As Long, filter_value As Variant) As Variant
 
+ 'TRANSPOSE IS EXPENSIVE, BUT WE DO IT ONCE
+ 'REDIM IS EXPENSIVE, WE DO IT COUNT TIMES
+ 
  'INPUT ARRAY ROWS
  Dim n1 As Long, n2 As Long
  n1 = LBound(input_arr, 2)
