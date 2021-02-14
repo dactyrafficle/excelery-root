@@ -2,7 +2,7 @@ Public Function FILTER_ARR(input_arr As Variant, col_index As Long, filter_value
 
  'TRANSPOSE IS EXPENSIVE, BUT WE DO IT ONCE
  'REDIM IS EXPENSIVE, WE DO IT COUNT TIMES
- 
+
  'INPUT ARRAY ROWS
  Dim n1 As Long, n2 As Long
  n1 = LBound(input_arr, 2)
@@ -22,13 +22,13 @@ Public Function FILTER_ARR(input_arr As Variant, col_index As Long, filter_value
 
    count = count + 1
    m2 = m2 + count
-   ReDim Preserve temp_arr(n1 To n2, m1 To m2)
+   ReDim Preserve temp_arr(n1 To n2, m1 To m2) 'EXPENSIVE
    For x = n1 To n2
      temp_arr(x, count) = input_arr(y, x)
     Next x
   End If
  Next y
 
- FILTER_ARR = Application.Transpose(temp_arr)
+ FILTER_ARR = Application.Transpose(temp_arr) 'EXPENSIVE
 
 End Function
