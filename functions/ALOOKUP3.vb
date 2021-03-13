@@ -1,4 +1,3 @@
-Attribute VB_Name = "fn_ALOOKUP3"
 Option Explicit
 
 'ARR_ CAN BE LBOUND 0 OR 1, IS NO MATTER
