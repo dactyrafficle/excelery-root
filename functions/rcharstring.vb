@@ -1,24 +1,18 @@
-Attribute VB_Name = "Module1"
+Option Explicit
 
-'this function is for returning a random string of characters
-
-Function rcharstring(n As Integer) As String
+Function rcharstring(n As Long) As String
 
     Dim str As String
     str = ""
     
-    Dim min, max As Integer
-    min = 48
+    Dim min As Long, max As Long
+    min = 97
     max = 125
     
-    Dim i As Integer
-    
+    Dim i As Long, Dim x as Long
     For i = 1 To n
-    
-        Dim x As Integer
         x = Int(min + Rnd() * (max - min + 1))
         str = str & Chr(x)
-    
     Next i
     
     rcharstring = str
