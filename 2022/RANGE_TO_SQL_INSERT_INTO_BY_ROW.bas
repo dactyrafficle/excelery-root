@@ -8,7 +8,7 @@ Public Sub GET_SQL_INSERT_INTO(control As IRibbonControl)
 End Sub
 
 
-Private Sub RANGE_TO_SQL_INSERT_INTO_BY_ROW()
+Sub RANGE_TO_SQL_INSERT_INTO_BY_ROW()
  
   Dim doubleQuote As String
   doubleQuote = Chr(34)
@@ -19,6 +19,9 @@ Private Sub RANGE_TO_SQL_INSERT_INTO_BY_ROW()
    MsgBox "there is nthing here"
    Exit Sub
   End If
+  
+  Dim table_name As String
+  table_name = Application.InputBox("TABLE NAME :")
   
   Set r = Range("a1", Range("a1").End(xlToRight).End(xlDown))
   
@@ -40,14 +43,35 @@ Private Sub RANGE_TO_SQL_INSERT_INTO_BY_ROW()
    
   f.WriteLine ""
   
-  Dim y As Long, x As Long
+  Dim header As String
+  header = header & "INSERT INTO " & table_name & " ("
+
+  Dim x As Long
+  For x = 1 To UBound(arr, 2)
+    header = header & arr(1, x)
+    
+    If (x <> UBound(arr, 2)) Then
+      header = header & ", "
+    End If
+    
+    If (x = UBound(arr, 2)) Then
+      header = header & ")"
+    End If
+    
+  Next x
+  header = header & ""
+  
+  
+  Dim y As Long
   For y = 2 To UBound(arr, 1)
-  
+
+    
     Dim str As String
-    str = "INSERT INTO COMPETITION_RESULTS (COMPETITION, GENDER, WEIGHT_CLASS, LIFT, RANK, NAME, NATION, DOB, BODY_WEIGHT, COMPETITION_GROUP, ATTEMPT, WEIGHT, SUCCESS) VALUES ("
-    str = str & ""
-  
+    str = header & " VALUES ("
+    
     For x = 1 To UBound(arr, 2)
+    
+
     
       str = str & doubleQuote & arr(y, x) & doubleQuote
     
