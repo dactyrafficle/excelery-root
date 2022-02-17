@@ -1,4 +1,4 @@
-Function EXPORT_STR_AS_TXT_OPEN_IN_CHROME(str As String)
+Public Sub EXPORT_STR_AS_TXT_OPEN_IN_CHROME(str As String)
 
   Dim fso As Scripting.FileSystemObject
   Set fso = New Scripting.FileSystemObject
@@ -10,8 +10,7 @@ Function EXPORT_STR_AS_TXT_OPEN_IN_CHROME(str As String)
   Dim f As Scripting.TextStream
   Set f = fso.CreateTextFile(FilePath & FileName, 1, 0)
 
-
-  f.WriteLine wb_output
+  f.WriteLine str
   
   'CLOSE FSO
   f.Close
@@ -22,4 +21,4 @@ Function EXPORT_STR_AS_TXT_OPEN_IN_CHROME(str As String)
   url = "file:///C:/Users/" & Environ("username") & "/Downloads/" & FileName
   Shell (path & " -new-tab -url " & url)
 
-End Function
+End Sub
