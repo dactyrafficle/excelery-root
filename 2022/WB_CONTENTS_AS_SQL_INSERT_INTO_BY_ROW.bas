@@ -1,3 +1,12 @@
+Option Explicit
+
+Public Sub TO_SQL_INSERT_INTO(control As IRibbonControl)
+
+    Call WB_CONTENTS_AS_SQL_INSERT_INTO_BY_ROW
+
+End Sub
+
+
 Sub WB_CONTENTS_AS_SQL_INSERT_INTO_BY_ROW()
 
  'Dim table_name As String
